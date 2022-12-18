@@ -1,0 +1,51 @@
+/* .kiselev_before p{
+	text-align: center;
+}
+.kiselev_before{
+	max-width: 300px;
+} */
+
+figure {
+    border: 1px solid #ccc; /* рамка */
+    background-color: #f1f0f0; /* цвет фона */
+    padding: 5px; /* отступы от картинки */
+    width: 300px; /* ширина картинки */
+    }
+figcaption {
+    text-align: center; /* подпись по центру*/
+}
+
+.containerForKiselev{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+
+}
+
+.containerForSoloviev{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+
+}
+
+.containerForSimonyan{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+
+}
+
+.containerForSkabeeva{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+
+}
+
+.containerForKadyrov{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+
+}
