@@ -1,6 +1,6 @@
 import string
-import nltk
-from nltk.tokenize import word_tokenize, wordpunct_tokenize
+from nltk import tokenize
+from nltk.tokenize import word_tokenize, wordpunct_tokenize, MWETokenizer
 from nltk.probability import FreqDist
 from nltk.corpus import stopwords
 from wordcloud import WordCloud
@@ -13,16 +13,20 @@ import snoop
 import time
 import os
 from deep_translator import GoogleTranslator
+# from flashtext import KeywordProcessor
+# keyword_processor = KeywordProcessor()
 morph = pymorphy2.MorphAnalyzer()
 mask = imageio.v2.imread(r'medvedev.jpg')
 
+@snoop
 def parse_channel_history():
     with open("api.txt", "r") as file:
         api_id = int(float(file.readline()))
         api_hash = file.readline()
 
     app = Client("my_account", api_id=api_id, api_hash=api_hash)
-    list_of_channels = ["RKadyrov_95","margaritasimonyan","dmitri_kiselev","SolovievLive", "skabeeva"]
+    # list_of_channels = ["RKadyrov_95","margaritasimonyan","dmitri_kiselev","SolovievLive", "skabeeva"]
+    #list_of_channels = ["margaritasimonyan"]
     # for i in range(len(list_of_channels)):
     #     file_before = open(f"./output/{list_of_channels[i]}_before_24.02.2022.txt", "wb")
     #     file_after = open(f"./output/{list_of_channels[i]}_after_24.02.2022.txt", "wb")
@@ -36,19 +40,66 @@ def parse_channel_history():
     #                 elif message.text != None and message.date >= end:  # Условие не будет выполнено, если message.text = None
     #                     file_after.write(message.text.encode("utf-16"))
     #         file_before.close(),  file_after.close()
-        # app.run(main())
 
+    # for i in range(len(list_of_channels)):
+    #     # file_before = open(f"./output/{list_of_channels[i]}_newspeak_before_24.02.2022.txt", "w", encode='UTF-8')
+    #     file_after = open(f"./output/{list_of_channels[i]}_newspeak_after_24.02.2022.txt", "wb")
+    #     end = datetime.date(2022, 2, 24)
+    #     date_list = [datetime.date(2022, 4, 25), datetime.date(2022, 4, 28), datetime.date(2022, 6, 2),
+    #                  datetime.date(2022, 7, 27), datetime.date(2022, 8, 3), datetime.date(2022, 9, 2),
+    #                  datetime.date(2022, 9, 9), datetime.date(2022, 11, 25), datetime.date(2022, 11, 28),
+    #                  datetime.date(2022, 12, 3), datetime.date(2022, 12, 9), datetime.date(2022, 12, 12),
+    #                  datetime.date(2022, 11, 30)]
+    #     async def main():
+    #         async with app:
+    #             async for message in app.get_chat_history(list_of_channels[i]):
+    #                 # if message.text != None and message.date < end:  # Условие не будет выполнено, если message.text = None
+    #                 #     file_before.write(message.text.encode("utf-8"))
+    #                 print(datetime.datetime.date(message.date))
+    #                 if message.text != None and datetime.datetime.date(message.date) > end and \
+    #                         datetime.datetime.date(message.date) in date_list:  # Условие не
+    #                     # будет выполнено, если message.text = None
+    #                     file_after.write(message.text.encode("utf-8"))
+    #                     # file_after.write(str(message.date).encode("utf-8"))
+    #         #file_before.close(),
+    #         file_after.close()
+    #     app.run(main())
+
+@snoop
 def analysis():
     channels_history_list = []
     for root, dirs, files in os.walk("./output/"):
         for name in files:
-            if "frequency" not in name and name.endswith(".txt"):
+            if "frequency" not in name and "newspeak" not in name and name.endswith(".txt"):
                 channels_history_list.append(name)
+
+    newspeak = {'хлопок', 'задымление', 'подтопление', 'ситуация', 'жесткая посадка', 'касание', 'сближение',
+                'беспорядки', 'экстремизм', 'фейк', 'неонацисты', 'фашисты', 'сатанисты', 'воссоединение',
+                'нам не оставили выбора', 'защита народа Донбасса', 'защита мирного населения', 'идет по плану',
+                'жест доброй воли', 'сщелкивание', 'освобождение', 'террористический акт', 'родная гавань'}
 
     for channel in channels_history_list:
         with open(f"C:\\Users\\Vadik\\PycharmProjects\\NLTK\\output\\{channel}", 'r', encoding="utf-8") as channel_history:
             text = channel_history.read().lower()
-        @snoop### Анализ текста, приводим к нулевой форме
+        @snoop
+        def count_newspeak(text, set):
+            tokenizer = tokenize.WordPunctTokenizer()
+            text_words = tokenizer.tokenize(text)
+            tokenizer = MWETokenizer(separator=' ')
+            tokenizer.add_mwe(('защита', 'народа', 'донбасса'))
+            tokenizer.add_mwe(('защита', 'мирного', 'населения'))
+            tokenizer.add_mwe(('идет', 'по', 'плану'))
+            tokenizer.add_mwe(('жест', 'доброй', 'воля'))
+            tokenizer.add_mwe(('родная', 'гавань'))
+            counted_dict = {}
+            for words in set:
+                if text.count(words) != 0:
+                    counted_dict[text.count(words)] = words
+            return counted_dict, sum(counted_dict.keys())
+
+        newspeak_output = count_newspeak(text, newspeak)
+        @snoop
+        ### Анализ текста, приводим к нулевой форме
         def zero_morph(text):
             russian_stopwords = stopwords.words("russian")
             additional_stopwords = {"не", "на", "это", "наш", "который", "такой", "самый", "мы", "свой", "https", "t", "me"}
@@ -60,58 +111,71 @@ def analysis():
                 0].normal_form in additional_stopwords]
             return ' '.join(output)
 
-        text = zero_morph(text)
-        text = wordpunct_tokenize(text)
+        # text = zero_morph(text)
+        # text = wordpunct_tokenize(text)
 
         if "before" in channel:
             fdist = FreqDist(text)
-            print(fdist.most_common(30))
+            # print(fdist.most_common(30))
             with open(f"./output/{channel[:-4]}_frequency_words.txt", "w", \
                     encoding="utf-16") as file:
                 for j in fdist.most_common(30):
                     line = ' '.join(str(x) for x in j)
                     file.write(line + '\n')
 
+            with open(f"./output/{channel[:-4]}_newspeak.txt", "w", \
+                      encoding="utf-16") as file:
+                print(newspeak_output)
+                file.write(str(newspeak_output))
+
             ### Построение облака слов и запись его в файл
             text_raw = " ".join(text)
             ### Маска для облака слов
             mask = imageio.v2.imread(r'medvedev.jpg')
             ### Облако слов "до"
-            wordcloud = WordCloud(width=2000,
-                                  height=1500,
-                                  random_state=1,
-                                  background_color='white',
-                                  colormap='Set2',
-                                  collocations=False,
-                                  mask=mask).generate(text_raw)
-            plt.imshow(wordcloud, interpolation='bilinear')
-            plt.axis("off")
-            plt.savefig(f"./output/{channel[:-4]}_frequency_words.png")
-            plt.close()
+            if len(text_raw) != 0:
+                wordcloud = WordCloud(width=2000,
+                                      height=1500,
+                                      random_state=1,
+                                      background_color='white',
+                                      colormap='Set2',
+                                      collocations=False,
+                                      mask=mask).generate(text_raw)
+                plt.imshow(wordcloud, interpolation='bilinear')
+                plt.axis("off")
+                plt.savefig(f"./output/{channel[:-4]}_frequency_words.png")
+                plt.close()
         else:
             fdist = FreqDist(text)
-            print(fdist.most_common(30))
+            # print(fdist.most_common(30))
             with open(f"./output/{channel[:-4]}_frequency_words.txt", "w", encoding="utf-16") as \
                     file:
                 for j in fdist.most_common(30):
                     line = ' '.join(str(x) for x in j)
                     file.write(line + '\n')
+
+            with open(f"./output/{channel[:-4]}_newspeak.txt", "w", \
+                      encoding="utf-16") as file:
+                print(newspeak_output)
+                file.write(str(newspeak_output))
+
             ### Построение облака слов и запись его в файл
             text_raw = " ".join(text)
             ### Маска для облака слов
             mask = imageio.v2.imread(r'medvedev.jpg')
-            ### Облако слов "до"
-            wordcloud = WordCloud(width=2000,
-                                  height=1500,
-                                  random_state=1,
-                                  background_color='white',
-                                  colormap='Set2',
-                                  collocations=False,
-                                  mask=mask).generate(text_raw)
-            plt.imshow(wordcloud, interpolation='bilinear')
-            plt.axis("off")
-            plt.savefig(f"./output/{channel[:-4]}_frequency_words.png")
-            plt.close()
+            ### Облако слов "после"
+            if len(text_raw) != 0:
+                wordcloud = WordCloud(width=2000,
+                                      height=1500,
+                                      random_state=1,
+                                      background_color='white',
+                                      colormap='Set2',
+                                      collocations=False,
+                                      mask=mask).generate(text_raw)
+                plt.imshow(wordcloud, interpolation='bilinear')
+                plt.axis("off")
+                plt.savefig(f"./output/{channel[:-4]}_frequency_words.png")
+                plt.close()
 
 def translate():
     channels_to_be_translated_list = []
@@ -151,14 +215,11 @@ def translate():
                 plt.savefig(f"./output/{channels_to_be_translated_list[i]}_en.png".replace(".txt",""))
                 plt.close()
 
-# translate()
 
+    # print(len(tokenizer.tokenize(text_words)), text_words.count(('специальная военная операция')))
 if __name__ == '__main__':
     start_time = time.time()
     # parse_channel_history()
-    # analysis()
-    translate()
+    analysis()
+    # translate()
     print("--- %s seconds ---" % (time.time() - start_time))
-
-
-
