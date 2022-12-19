@@ -5,113 +5,103 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rhetoric analysis</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="https://reinzler.github.io/NLTK/style.css">
     <script src="./script/script.js"></script>
     
 </head>
 <body>
     <h1>How russian propagandists change their rhetoric after 24.02.2022?</h1>
     <p>A small research of russian propagandists telegram channels before and after 24.02.2022. How did they change their rhetorics if they did? How often do they use "newspeak". List of "newspeak" according to <a href="https://spravdi.gov.ua/en/booms-and-gestures-of-goodwill-how-russia-uses-newspeak-in-the-war-against-ukraine/">newspeak list</a></p>
-    <p>To begin with, lets parce russian propagandists telegram chats history before and after beginning "special military operation". Second step: lets count 30 most frequently using words before and after.</p>
-    <!-- <p>Lets have a look:</p> -->
+    <p>To begin with, lets parce russian propagandists telegram chats history before and after beginning "special military operation" further "SMO". Second step: lets count 30 most frequently using words before and after.</p>
     <p>For a convenience I made a translation to english via <a href="https://github.com/prataffel/deep_translator">deep_translator.</a>&nbspLets have a look:</p>
 
     <!-- Kiselev -->
     <div class="buttons">
-        <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoilerForKiselev') .style.display=='none') {document.getElementById('spoilerForKiselev') .style.display=''}else{document.getElementById('spoilerForKiselev') .style.display='none'}">Kiselev</button>
+        <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoilerForKiselev').style.display=='none') {document.getElementById('spoilerForKiselev').style.display=''
+        document.getElementById('spoilerForSimonyan').style.display='none', document.getElementById('spoilerForSkabeeva').style.display='none', document.getElementById('spoilerForSoloviev').style.display='none', document.getElementById('spoilerForKadyrov').style.display='none'}else{document.getElementById('spoilerForKiselev').style.display='none'}">Kiselev</button>
 
-        <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoilerForSimonyan') .style.display=='none') {document.getElementById('spoilerForSimonyan') .style.display=''}else{document.getElementById('spoilerForSimonyan') .style.display='none'}">Simonyan</button> 
+        <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoilerForSimonyan').style.display=='none') {document.getElementById('spoilerForSimonyan').style.display='',document.getElementById('spoilerForKiselev').style.display='none', document.getElementById('spoilerForSkabeeva').style.display='none', document.getElementById('spoilerForSoloviev').style.display='none', document.getElementById('spoilerForKadyrov').style.display='none'}else{document.getElementById('spoilerForSimonyan').style.display='none'}">Simonyan</button> 
         
-        <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoilerForSoloviev') .style.display=='none') {document.getElementById('spoilerForSoloviev') .style.display=''}else{document.getElementById('spoilerForSoloviev') .style.display='none'}">Soloviev</button> 
+        <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoilerForSoloviev') .style.display=='none') {document.getElementById('spoilerForSoloviev').style.display=''
+        document.getElementById('spoilerForKiselev').style.display='none', document.getElementById('spoilerForSkabeeva').style.display='none', document.getElementById('spoilerForSimonyan').style.display='none', document.getElementById('spoilerForKadyrov').style.display='none'}else{document.getElementById('spoilerForSoloviev').style.display='none'}">Soloviev</button> 
 
-        <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoilerForSkabeeva') .style.display=='none') {document.getElementById('spoilerForSkabeeva') .style.display=''}else{document.getElementById('spoilerForSkabeeva') .style.display='none'}">Skabeeva</button>
+        <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoilerForSkabeeva').style.display=='none') {document.getElementById('spoilerForSkabeeva').style.display='', document.getElementById('spoilerForKiselev').style.display='none', document.getElementById('spoilerForSimonyan').style.display='none', document.getElementById('spoilerForSoloviev').style.display='none', document.getElementById('spoilerForKadyrov').style.display='none'}else{document.getElementById('spoilerForSkabeeva').style.display='none'}">Skabeeva</button>
 
-        <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoilerForKadyrov') .style.display=='none') {document.getElementById('spoilerForKadyrov') .style.display=''}else{document.getElementById('spoilerForKadyrov') .style.display='none'}">Kadyrov</button>
+        <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoilerForKadyrov').style.display=='none') {document.getElementById('spoilerForKadyrov').style.display='', document.getElementById('spoilerForKiselev').style.display='none', document.getElementById('spoilerForSkabeeva').style.display='none', document.getElementById('spoilerForSoloviev').style.display='none', document.getElementById('spoilerForSimonyan').style.display='none'}else{document.getElementById('spoilerForKadyrov').style.display='none'}">Kadyrov</button>
 
     </div>
-    
-    
+  
     <div id="spoilerForKiselev" style="display:none">
         <div class="containerForKiselev">
             <figure>
-                <img src = "./output/dmitri_kiselev_before_24.02.2022_frequency_words.png" width="300px" height="300px">
+                <img src = "./output/dmitri_kiselev_before_24.02.2022_frequency_words.png" width="320px" >
                 <figcaption>Dmitri Kiselev before 24.02.2022 (ru)</figcaption>
             </figure>
 
             <figure>
-                <img src = "./output/dmitri_kiselev_before_24.02.2022_frequency_words_en.png" width="300px" height="300px">
+                <img src = "./output/dmitri_kiselev_before_24.02.2022_frequency_words_en.png" width="320px">
                 <figcaption>Dmitri Kiselev after 24.02.2022 (en)</figcaption>
             </figure>
-        </div>
-
-        <div class="containerForKiselev">
+        
             <figure>
-                <img src = "./output/dmitri_kiselev_after_24.02.2022_frequency_words.png" width="300px" height="300px">
+                <img src = "./output/dmitri_kiselev_after_24.02.2022_frequency_words.png" width="320px">
                 <figcaption>Dmitri Kiselev before 24.02.2022 (ru)</figcaption>
             </figure>
 
             <figure>
-                <img src = "./output/dmitri_kiselev_before_24.02.2022_frequency_words_en — copy.png" width="300px" height="300px">
+                <img src = "./output/dmitri_kiselev_before_24.02.2022_frequency_words_en — copy.png" width="320px">
                 <figcaption>Dmitri Kiselev after 24.02.2022 (en)</figcaption>
             </figure>
         </div>
     </div>
 
     <!-- Simonyan -->
-
-    
     <div id="spoilerForSimonyan" style="display:none">
         
         <div class="containerForSimonyan">
             <figure>
-                <img src = "./output/margaritasimonyan_before_24.02.2022_frequency_words.png" width="300px" height="300px">
+                <img src = "./output/margaritasimonyan_before_24.02.2022_frequency_words.png" width="320px">
                 <figcaption>Margarita Simonyan before 24.02.2022 (ru)</figcaption>
             </figure>
 
             <figure>
-                <img src = "./output/margaritasimonyan_before_24.02.2022_frequency_words_en.png" width="300px" height="300px">
+                <img src = "./output/margaritasimonyan_before_24.02.2022_frequency_words_en.png" width="320px">
                 <figcaption>Margarita Simonyan after 24.02.2022 (en)</figcaption>
             </figure>
-        </div>
 
-        <div class="containerForSimonyan">
             <figure>
-                <img src = "./output/margaritasimonyan_after_24.02.2022_frequency_words.png" width="300px" height="300px">
+                <img src = "./output/margaritasimonyan_after_24.02.2022_frequency_words.png" width="320px">
                 <figcaption>Margarita Simonyan before 24.02.2022 (ru)</figcaption>
             </figure>
 
             <figure>
-                <img src = "./output/margaritasimonyan_before_24.02.2022_frequency_words_en.png" width="300px" height="300px">
+                <img src = "./output/margaritasimonyan_before_24.02.2022_frequency_words_en.png" width="320px">
                 <figcaption>Margarita Simonyan after 24.02.2022 (en)</figcaption>
             </figure>
         </div>
     </div>
 
     <!-- Soloviev -->
-
-    
     <div id="spoilerForSoloviev" style="display:none">
         
         <div class="containerForSoloviev">
             <figure>
-                <img src = "./output/SolovievLive_before_24.02.2022_frequency_words.png" width="300px" height="300px">
+                <img src = "./output/SolovievLive_before_24.02.2022_frequency_words.png" width="320px">
                 <figcaption>Vladimir Soloviev before 24.02.2022 (ru)</figcaption>
             </figure>
 
             <figure>
-                <img src = "./output/SolovievLive_before_24.02.2022_frequency_words_en.png" width="300px" height="300px">
+                <img src = "./output/SolovievLive_before_24.02.2022_frequency_words_en.png" width="320px">
                 <figcaption>Vladimir Soloviev after 24.02.2022 (en)</figcaption>
             </figure>
-        </div>
 
-        <div class="containerForSoloviev">
             <figure>
-                <img src = "./output/SolovievLive_after_24.02.2022_frequency_words.png" width="300px" height="300px">
+                <img src = "./output/SolovievLive_after_24.02.2022_frequency_words.png" width="320px">
                 <figcaption>Vladimir Soloviev before 24.02.2022 (ru)</figcaption>
             </figure>
 
             <figure>
-                <img src = "./output/SolovievLive_before_24.02.2022_frequency_words_en.png" width="300px" height="300px">
+                <img src = "./output/SolovievLive_before_24.02.2022_frequency_words_en.png" width="320px">
                 <figcaption>Vladimir Soloviev after 24.02.2022 (en)</figcaption>
             </figure>
         </div>
@@ -124,24 +114,22 @@
         
         <div class="containerForSkabeeva">
             <figure>
-                <img src = "./output/skabeeva_before_24.02.2022_frequency_words.png" width="300px" height="300px">
+                <img src = "./output/skabeeva_before_24.02.2022_frequency_words.png" width="320px">
                 <figcaption>Olga Skabeeva before 24.02.2022 (ru)</figcaption>
             </figure>
 
             <figure>
-                <img src = "./output/skabeeva_before_24.02.2022_frequency_words_en.png" width="300px" height="300px">
+                <img src = "./output/skabeeva_before_24.02.2022_frequency_words_en.png" width="320px">
                 <figcaption>Olga Skabeeva after 24.02.2022 (en)</figcaption>
             </figure>
-        </div>
 
-        <div class="containerForSkabeeva">
             <figure>
-                <img src = "./output/skabeeva_after_24.02.2022_frequency_words.png" width="300px" height="300px">
+                <img src = "./output/skabeeva_after_24.02.2022_frequency_words.png" width="320px">
                 <figcaption>Olga Skabeeva before 24.02.2022 (ru)</figcaption>
             </figure>
 
             <figure>
-                <img src = "./output/skabeeva_before_24.02.2022_frequency_words_en.png" width="300px" height="300px">
+                <img src = "./output/skabeeva_before_24.02.2022_frequency_words_en.png" width="320px">
                 <figcaption>Olga Skabeeva after 24.02.2022 (en)</figcaption>
             </figure>
         </div>
@@ -149,33 +137,39 @@
 
     <!-- Kadyrov -->
 
-     
     <div id="spoilerForKadyrov" style="display:none">
         
         <div class="containerForKadyrov">
             <figure>
-                <img src = "./output/RKadyrov_95_before_24.02.2022_frequency_words.png" width="300px" height="300px">
+                <img src = "./output/RKadyrov_95_before_24.02.2022_frequency_words.png" width="320px">
                 <figcaption>Ramzan Kadyrov before 24.02.2022 (ru)</figcaption>
             </figure>
 
             <figure>
-                <img src = "./output/RKadyrov_95_before_24.02.2022_frequency_words_en.png" width="300px" height="300px">
+                <img src = "./output/RKadyrov_95_before_24.02.2022_frequency_words_en.png" width="320px">
                 <figcaption>Ramzan Kadyrov after 24.02.2022 (en)</figcaption>
             </figure>
         </div>
 
         <div class="containerForKadyrov">
             <figure>
-                <img src = "./output/RKadyrov_95_after_24.02.2022_frequency_words.png" width="300px" height="300px">
+                <img src = "./output/RKadyrov_95_after_24.02.2022_frequency_words.png" width="320px">
                 <figcaption>Ramzan Kadyrov before 24.02.2022 (ru)</figcaption>
             </figure>
 
             <figure>
-                <img src = "./output/RKadyrov_95_before_24.02.2022_frequency_words_en.png" width="300px" height="300px">
+                <img src = "./output/RKadyrov_95_before_24.02.2022_frequency_words_en.png" width="320px">
                 <figcaption>Ramzan Kadyrov after 24.02.2022 (en)</figcaption>
             </figure>
         </div>
     </div>
-
+    <h2>Let's analyze the results</h2>
+    <h4>Dmitriy Kiselev</h4>
+    <h4>Margarita Simonyan</h4>
+        <p>There weren't words such as "ukrainian", "Ukraine", "war", "military" and "city" before "SMO" began.</p>
+    <h4>Vladimir Soloviev</h4>
+        <p>26.05.2019 till 24.02.2022 "Ukraine" has been mentioned 6616 times. After 24.02.2022 "Ukraine" and "ukrainian" in sum have been mentioned 13505 times till 18.11.2022. For incomplete 9 months the increase is about 204%!&nbsp;Also I want to note, that from Vladimir Soloviev's rhetorics completely disappeared all mentioning about <a href="https://en.wikipedia.org/wiki/Alexei_Navalny">Alexei Navalny</a>&nbsp;(6171 before "SMO" started), coronavirus (6600). Mention frequency of russian president Vladimir Putin dicreased from 11th place in a list of top-30 most frequency mentioned words before "SMO" started to 24th. New words in Vladimir Soloviev's top-30 most frequency words, indicated with a dash: "destroy - 1850", "strike - 1993", "war - 2183", "operation - 2018", "territory - 2124".</p>
+    <h4>Ramzan Kadyrov</h4>
+        <p>New words in Ramzan Kadyrov's top-30 most frequency words, indicated with a dash: "Ukraine - 336", "ukrainian - 190", "hero - 229", "help - 208", "power - 188", "task - 183". I would especially like to point out that, words "growth - 184", "new - 183", "life - 186" disappeared. Words "Putin - 278", "world/peace - 315", were changed respectfully to "president - 270", "peaceful - 183".</p>
 </body>
 </html>

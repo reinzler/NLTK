@@ -9,7 +9,7 @@ figure {
     border: 1px solid #ccc; /* рамка */
     background-color: #f1f0f0; /* цвет фона */
     padding: 5px; /* отступы от картинки */
-    width: 300px; /* ширина картинки */
+    /*width: 330px; /* ширина картинки */
     }
 figcaption {
     text-align: center; /* подпись по центру*/
@@ -17,6 +17,7 @@ figcaption {
 
 .containerForKiselev{
     display: flex;
+    flex-wrap: wrap;
     justify-content:center;
     align-items: center;
 
@@ -24,6 +25,7 @@ figcaption {
 
 .containerForSoloviev{
     display: flex;
+    flex-wrap: wrap;
     justify-content:center;
     align-items: center;
 
@@ -31,6 +33,7 @@ figcaption {
 
 .containerForSimonyan{
     display: flex;
+    flex-wrap: wrap;
     justify-content:center;
     align-items: center;
 
@@ -38,6 +41,7 @@ figcaption {
 
 .containerForSkabeeva{
     display: flex;
+    flex-wrap: wrap;
     justify-content:center;
     align-items: center;
 
@@ -45,6 +49,7 @@ figcaption {
 
 .containerForKadyrov{
     display: flex;
+    flex-wrap: wrap;
     justify-content:center;
     align-items: center;
 
