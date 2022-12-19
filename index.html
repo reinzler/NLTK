@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rhetoric analysis</title>
-    <link rel=“stylesheet” type=“text/css” href=“style.css”>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <script src="./script/script.js"></script>
     
 </head>
@@ -17,10 +17,21 @@
     <p>For a convenience I made a translation to english via <a href="https://github.com/prataffel/deep_translator">deep_translator.</a>&nbspLets have a look:</p>
 
     <!-- Kiselev -->
+    <div class="buttons">
+        <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoilerForKiselev') .style.display=='none') {document.getElementById('spoilerForKiselev') .style.display=''}else{document.getElementById('spoilerForKiselev') .style.display='none'}">Kiselev</button>
 
-    <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoilerForKiselev') .style.display=='none') {document.getElementById('spoilerForKiselev') .style.display=''}else{document.getElementById('spoilerForKiselev') .style.display='none'}">Kiselev</button> 
-    <div id="spoilerForKiselev" style="display:none">
+        <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoilerForSimonyan') .style.display=='none') {document.getElementById('spoilerForSimonyan') .style.display=''}else{document.getElementById('spoilerForSimonyan') .style.display='none'}">Simonyan</button> 
         
+        <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoilerForSoloviev') .style.display=='none') {document.getElementById('spoilerForSoloviev') .style.display=''}else{document.getElementById('spoilerForSoloviev') .style.display='none'}">Soloviev</button> 
+
+        <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoilerForSkabeeva') .style.display=='none') {document.getElementById('spoilerForSkabeeva') .style.display=''}else{document.getElementById('spoilerForSkabeeva') .style.display='none'}">Skabeeva</button>
+
+        <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoilerForKadyrov') .style.display=='none') {document.getElementById('spoilerForKadyrov') .style.display=''}else{document.getElementById('spoilerForKadyrov') .style.display='none'}">Kadyrov</button>
+
+    </div>
+    
+    
+    <div id="spoilerForKiselev" style="display:none">
         <div class="containerForKiselev">
             <figure>
                 <img src = "./output/dmitri_kiselev_before_24.02.2022_frequency_words.png" width="300px" height="300px">
@@ -48,7 +59,7 @@
 
     <!-- Simonyan -->
 
-    <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoilerForSimonyan') .style.display=='none') {document.getElementById('spoilerForSimonyan') .style.display=''}else{document.getElementById('spoilerForSimonyan') .style.display='none'}">Simonyan</button> 
+    
     <div id="spoilerForSimonyan" style="display:none">
         
         <div class="containerForSimonyan">
@@ -78,7 +89,7 @@
 
     <!-- Soloviev -->
 
-    <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoilerForSoloviev') .style.display=='none') {document.getElementById('spoilerForSoloviev') .style.display=''}else{document.getElementById('spoilerForSoloviev') .style.display='none'}">Soloviev</button> 
+    
     <div id="spoilerForSoloviev" style="display:none">
         
         <div class="containerForSoloviev">
@@ -108,7 +119,7 @@
 
     <!-- Skabeeva -->
 
-    <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoilerForSkabeeva') .style.display=='none') {document.getElementById('spoilerForSkabeeva') .style.display=''}else{document.getElementById('spoilerForSkabeeva') .style.display='none'}">Skabeeva</button> 
+     
     <div id="spoilerForSkabeeva" style="display:none">
         
         <div class="containerForSkabeeva">
@@ -138,7 +149,7 @@
 
     <!-- Kadyrov -->
 
-    <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoilerForKadyrov') .style.display=='none') {document.getElementById('spoilerForKadyrov') .style.display=''}else{document.getElementById('spoilerForKadyrov') .style.display='none'}">Kadyrov</button> 
+     
     <div id="spoilerForKadyrov" style="display:none">
         
         <div class="containerForKadyrov">
