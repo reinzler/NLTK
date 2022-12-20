@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rhetoric analysis</title>
     <!-- <link rel="stylesheet" type="text/css" href="https://reinzler.github.io/NLTK/style.css"> -->
-    <script src="./script/script.js"></script>
+
     
 </head>
 <body>
@@ -25,7 +25,6 @@
         flex-wrap: wrap;
         justify-content:center;
         align-items: center;
-    
     }
     
     .containerForSoloviev{
@@ -33,7 +32,6 @@
         flex-wrap: wrap;
         justify-content:center;
         align-items: center;
-    
     }
     
     .containerForSimonyan{
@@ -41,7 +39,6 @@
         flex-wrap: wrap;
         justify-content:center;
         align-items: center;
-    
     }
     
     .containerForSkabeeva{
@@ -49,7 +46,6 @@
         flex-wrap: wrap;
         justify-content:center;
         align-items: center;
-    
     }
     
     .containerForKadyrov{
@@ -57,29 +53,39 @@
         flex-wrap: wrap;
         justify-content:center;
         align-items: center;
-    
-    }</style>
+    }
+/* 
+    button:hover {
+        color: #ffffff;
+        background: #5D26C1;
+    } */
+
+    /* button:click {
+        color: #ffffff;
+        background: #5D26C1;
+    } */
+
+    </style>
     <h1>How russian propagandists change their rhetoric after 24.02.2022?</h1>
     <p>A small research of russian propagandists telegram channels before and after 24.02.2022. How did they change their rhetorics if they did? How often do they use "newspeak". List of "newspeak" according to <a href="https://spravdi.gov.ua/en/booms-and-gestures-of-goodwill-how-russia-uses-newspeak-in-the-war-against-ukraine/">newspeak list</a></p>
-    <p>To begin with, lets parce russian propagandists telegram chats history before and after beginning "special military operation" further "SMO". Second step: lets count 30 most frequently using words before and after.</p>
+    <h2>First step</h2>
+    <p>To begin with, lets parce russian propagandists telegram chats history before and after beginning "special military operation" further "SMO", lets count 30 most frequently using words before and after.</p>
     <p>For a convenience I made a translation to english via <a href="https://github.com/prataffel/deep_translator">deep_translator.</a>&nbspLets have a look:</p>
 
-    <!-- Kiselev -->
     <div class="buttons">
-        <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoilerForKiselev').style.display=='none') {document.getElementById('spoilerForKiselev').style.display=''
-        document.getElementById('spoilerForSimonyan').style.display='none', document.getElementById('spoilerForSkabeeva').style.display='none', document.getElementById('spoilerForSoloviev').style.display='none', document.getElementById('spoilerForKadyrov').style.display='none'}else{document.getElementById('spoilerForKiselev').style.display='none'}">Kiselev</button>
+        <button title="Click to show/hide content" type="button" tabindex="0" class="spoiler-buttons" onclick=" if(document.getElementById('spoilerForKiselev').style.display=='none') {document.getElementById('spoilerForKiselev').style.display='', document.getElementById('spoilerForSimonyan').style.display='none', document.getElementById('spoilerForSkabeeva').style.display='none', document.getElementById('spoilerForSoloviev').style.display='none', document.getElementById('spoilerForKadyrov').style.display='none';resetColor(this);}else{ document.getElementById('spoilerForKiselev').style.display='none'};">Kiselev</button>
 
-        <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoilerForSimonyan').style.display=='none') {document.getElementById('spoilerForSimonyan').style.display='',document.getElementById('spoilerForKiselev').style.display='none', document.getElementById('spoilerForSkabeeva').style.display='none', document.getElementById('spoilerForSoloviev').style.display='none', document.getElementById('spoilerForKadyrov').style.display='none'}else{document.getElementById('spoilerForSimonyan').style.display='none'}">Simonyan</button> 
+        <button title="Click to show/hide content" type="button" class="spoiler-buttons" onclick=" if(document.getElementById('spoilerForSimonyan').style.display=='none') {document.getElementById('spoilerForSimonyan').style.display='',document.getElementById('spoilerForKiselev').style.display='none', document.getElementById('spoilerForSkabeeva').style.display='none', document.getElementById('spoilerForSoloviev').style.display='none', document.getElementById('spoilerForKadyrov').style.display='none';resetColor(this);}else {document.getElementById('spoilerForSimonyan').style.display='none'}">Simonyan</button> 
         
-        <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoilerForSoloviev') .style.display=='none') {document.getElementById('spoilerForSoloviev').style.display=''
-        document.getElementById('spoilerForKiselev').style.display='none', document.getElementById('spoilerForSkabeeva').style.display='none', document.getElementById('spoilerForSimonyan').style.display='none', document.getElementById('spoilerForKadyrov').style.display='none'}else{document.getElementById('spoilerForSoloviev').style.display='none'}">Soloviev</button> 
+        <button title="Click to show/hide content" type="button" class="spoiler-buttons" onclick=" if(document.getElementById('spoilerForSoloviev') .style.display=='none') {document.getElementById('spoilerForSoloviev').style.display='', document.getElementById('spoilerForKiselev').style.display='none', document.getElementById('spoilerForSkabeeva').style.display='none', document.getElementById('spoilerForSimonyan').style.display='none', document.getElementById('spoilerForKadyrov').style.display='none';resetColor(this);}else { document.getElementById('spoilerForSoloviev').style.display='none'}">Soloviev</button> 
 
-        <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoilerForSkabeeva').style.display=='none') {document.getElementById('spoilerForSkabeeva').style.display='', document.getElementById('spoilerForKiselev').style.display='none', document.getElementById('spoilerForSimonyan').style.display='none', document.getElementById('spoilerForSoloviev').style.display='none', document.getElementById('spoilerForKadyrov').style.display='none'}else{document.getElementById('spoilerForSkabeeva').style.display='none'}">Skabeeva</button>
+        <button title="Click to show/hide content" type="button" class="spoiler-buttons" onclick=" if(document.getElementById('spoilerForSkabeeva').style.display=='none') {document.getElementById('spoilerForSkabeeva').style.display='', document.getElementById('spoilerForKiselev').style.display='none', document.getElementById('spoilerForSimonyan').style.display='none', document.getElementById('spoilerForSoloviev').style.display='none', document.getElementById('spoilerForKadyrov').style.display='none';resetColor(this);}else {document.getElementById('spoilerForSkabeeva').style.display='none'}">Skabeeva</button>
 
-        <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoilerForKadyrov').style.display=='none') {document.getElementById('spoilerForKadyrov').style.display='', document.getElementById('spoilerForKiselev').style.display='none', document.getElementById('spoilerForSkabeeva').style.display='none', document.getElementById('spoilerForSoloviev').style.display='none', document.getElementById('spoilerForSimonyan').style.display='none'}else{document.getElementById('spoilerForKadyrov').style.display='none'}">Kadyrov</button>
+        <button title="Click to show/hide content" type="button" class="spoiler-buttons" onclick=" if(document.getElementById('spoilerForKadyrov').style.display=='none') {document.getElementById('spoilerForKadyrov').style.display='', document.getElementById('spoilerForKiselev').style.display='none', document.getElementById('spoilerForSkabeeva').style.display='none', document.getElementById('spoilerForSoloviev').style.display='none', document.getElementById('spoilerForSimonyan').style.display='none'; resetColor(this)}else {document.getElementById('spoilerForKadyrov').style.display='none'}">Kadyrov</button>
 
     </div>
-  
+
+    <!-- Kiselev -->
     <div id="spoilerForKiselev" style="display:none">
         <div class="containerForKiselev">
             <figure>
@@ -157,8 +163,6 @@
     </div>
 
     <!-- Skabeeva -->
-
-     
     <div id="spoilerForSkabeeva" style="display:none">
         
         <div class="containerForSkabeeva">
@@ -185,7 +189,6 @@
     </div>
 
     <!-- Kadyrov -->
-
     <div id="spoilerForKadyrov" style="display:none">
         
         <div class="containerForKadyrov">
@@ -212,7 +215,8 @@
             </figure>
         </div>
     </div>
-    <h2>Let's analyze the results</h2>
+
+    <h3>Let's analyze the results</h3>
     <h4>Dmitriy Kiselev</h4>
     <h4>Margarita Simonyan</h4>
         <p>There weren't words such as "ukrainian", "Ukraine", "war", "military" and "city" before "SMO" began.</p>
@@ -220,5 +224,26 @@
         <p>26.05.2019 till 24.02.2022 "Ukraine" has been mentioned 6616 times. After 24.02.2022 "Ukraine" and "ukrainian" in sum have been mentioned 13505 times till 18.11.2022. For incomplete 9 months the increase is about 204%!&nbsp;Also I want to note, that from Vladimir Soloviev's rhetorics completely disappeared all mentioning about <a href="https://en.wikipedia.org/wiki/Alexei_Navalny">Alexei Navalny</a>&nbsp;(6171 before "SMO" started), coronavirus (6600). Mention frequency of russian president Vladimir Putin dicreased from 11th place in a list of top-30 most frequency mentioned words before "SMO" started to 24th. New words in Vladimir Soloviev's top-30 most frequency words, indicated with a dash: "destroy - 1850", "strike - 1993", "war - 2183", "operation - 2018", "territory - 2124".</p>
     <h4>Ramzan Kadyrov</h4>
         <p>New words in Ramzan Kadyrov's top-30 most frequency words, indicated with a dash: "Ukraine - 336", "ukrainian - 190", "hero - 229", "help - 208", "power - 188", "task - 183". I would especially like to point out that, words "growth - 184", "new - 183", "life - 186" disappeared. Words "Putin - 278", "world/peace - 315", were changed respectfully to "president - 270", "peaceful - 183".</p>
+    
+    <h2>Second step: </h2>
+
+    <script>
+        // button.addEventListener('click', function() {
+        //     button.blur();
+        //     resetColor(button);
+        //     });
+    
+        function resetColor(element) {
+        // Найти все кнопки в классе, кроме текущей
+            let buttons = document.querySelectorAll('.spoiler-buttons:not(element)');
+            // Перебрать все кнопки
+            buttons.forEach(button => {
+                // Задать стандартный цвет
+                button.style.backgroundColor = '';
+            });
+        element.style.backgroundColor = 'gray';
+    }
+
+    </script>
 </body>
 </html>
