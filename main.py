@@ -13,7 +13,8 @@ import snoop
 import time
 import os
 from deep_translator import GoogleTranslator
-# from flashtext import KeywordProcessor
+from tqdm import tqdm
+
 # keyword_processor = KeywordProcessor()
 morph = pymorphy2.MorphAnalyzer()
 mask = imageio.v2.imread(r'medvedev.jpg')
@@ -65,6 +66,7 @@ def parse_channel_history():
     #         file_after.close()
     #     app.run(main())
 
+
 @snoop
 def analysis():
     channels_history_list = []
@@ -73,16 +75,15 @@ def analysis():
             if "frequency" not in name and "newspeak" not in name and name.endswith(".txt"):
                 channels_history_list.append(name)
 
-    newspeak = {'хлопок', 'задымление', 'подтопление', 'ситуация', 'жесткая посадка', 'касание', 'сближение',
-                'беспорядки', 'экстремизм', 'фейк', 'неонацисты', 'фашисты', 'сатанисты', 'воссоединение',
-                'нам не оставили выбора', 'защита народа Донбасса', 'защита мирного населения', 'идет по плану',
-                'жест доброй воли', 'сщелкивание', 'освобождение', 'террористический акт', 'родная гавань'}
-
     for channel in channels_history_list:
         with open(f"C:\\Users\\Vadik\\PycharmProjects\\NLTK\\output\\{channel}", 'r', encoding="utf-8") as channel_history:
             text = channel_history.read().lower()
         @snoop
-        def count_newspeak(text, set):
+        def count_newspeak(text, channel):
+            newspeak = {'хлопок', 'задымление', 'подтопление', 'ситуация', 'жесткая посадка', 'касание', 'сближение',
+                        'беспорядки', 'экстремизм', 'фейк', 'неонацисты', 'фашисты', 'сатанисты', 'воссоединение',
+                        'нам не оставили выбора', 'защита народа Донбасса', 'защита мирного населения', 'идет по плану',
+                        'жест доброй воли', 'сщелкивание', 'освобождение', 'террористический акт', 'родная гавань'}
             tokenizer = tokenize.WordPunctTokenizer()
             text_words = tokenizer.tokenize(text)
             tokenizer = MWETokenizer(separator=' ')
@@ -91,13 +92,21 @@ def analysis():
             tokenizer.add_mwe(('идет', 'по', 'плану'))
             tokenizer.add_mwe(('жест', 'доброй', 'воля'))
             tokenizer.add_mwe(('родная', 'гавань'))
+            text_after_mwe = tokenizer.tokenize(text_words)
             counted_dict = {}
-            for words in set:
-                if text.count(words) != 0:
-                    counted_dict[text.count(words)] = words
-            return counted_dict, sum(counted_dict.keys())
+            global common_list
+            common_list = []
+            for words in tqdm(newspeak):
+                if text_after_mwe.count(words) != 0:
+                    counted_dict[words] = text.count(words)
+            list_for_dict_and_channel = []
+            list_for_dict_and_channel.append(channel.partition("_")[0])
+            list_for_dict_and_channel.append(counted_dict)
+            common_list.append(list_for_dict_and_channel)
+            list_for_dict_and_channel = []
+            return counted_dict, sum(counted_dict.values())
 
-        newspeak_output = count_newspeak(text, newspeak)
+        newspeak_output = count_newspeak(text, channel)
         @snoop
         ### Анализ текста, приводим к нулевой форме
         def zero_morph(text):
@@ -105,78 +114,92 @@ def analysis():
             additional_stopwords = {"не", "на", "это", "наш", "который", "такой", "самый", "мы", "свой", "https", "t", "me"}
             russian_stopwords = set(stopwords.words("russian"))
             words = wordpunct_tokenize(text)
-            preprocess_words = [word for word in words if word.isalpha() == True]
-            without_stop_words = [word for word in preprocess_words if not word in russian_stopwords]
-            output = [morph.parse(word)[0].normal_form for word in without_stop_words if not morph.parse(word)[
+            preprocess_words = [word for word in tqdm(words) if word.isalpha() == True]
+            without_stop_words = [word for word in tqdm(preprocess_words) if not word in russian_stopwords]
+            output = [morph.parse(word)[0].normal_form for word in tqdm(without_stop_words) if not morph.parse(word)[
                 0].normal_form in additional_stopwords]
             return ' '.join(output)
 
         # text = zero_morph(text)
         # text = wordpunct_tokenize(text)
+        def print_and_plot(text,channel):
+            if "before" in channel:
+                # fdist = FreqDist(text)
+                # with open(f"./output/{channel[:-4]}_frequency_words.txt", "w", \
+                #         encoding="utf-16") as file:
+                #     for j in fdist.most_common(30):
+                #         line = ' '.join(str(x) for x in j)
+                #         file.write(line + '\n')
 
-        if "before" in channel:
-            fdist = FreqDist(text)
-            # print(fdist.most_common(30))
-            with open(f"./output/{channel[:-4]}_frequency_words.txt", "w", \
-                    encoding="utf-16") as file:
-                for j in fdist.most_common(30):
-                    line = ' '.join(str(x) for x in j)
-                    file.write(line + '\n')
+                with open(f"./output/{channel[:-4]}_newspeak.txt", "w", \
+                          encoding="utf-16") as file:
+                    file.write(str(newspeak_output))
 
-            with open(f"./output/{channel[:-4]}_newspeak.txt", "w", \
-                      encoding="utf-16") as file:
-                print(newspeak_output)
-                file.write(str(newspeak_output))
+                # ### Построение облака слов и запись его в файл
+                # text_raw = " ".join(text)
+                # ### Маска для облака слов
+                # mask = imageio.v2.imread(r'medvedev.jpg')
+                # ### Облако слов "до"
+                # if len(text_raw) != 0:
+                #     wordcloud = WordCloud(width=2000,
+                #                           height=1500,
+                #                           random_state=1,
+                #                           background_color='white',
+                #                           colormap='Set2',
+                #                           collocations=False,
+                #                           mask=mask).generate(text_raw)
+                #     plt.imshow(wordcloud, interpolation='bilinear')
+                #     plt.axis("off")
+                #     plt.savefig(f"./output/{channel[:-4]}_frequency_words.png")
+                #     plt.close()
+            else:
+                # fdist = FreqDist(text)
+                # with open(f"./output/{channel[:-4]}_frequency_words.txt", "w", encoding="utf-16") as \
+                #         file:
+                #     for j in fdist.most_common(30):
+                #         line = ' '.join(str(x) for x in j)
+                #         file.write(line + '\n')
 
-            ### Построение облака слов и запись его в файл
-            text_raw = " ".join(text)
-            ### Маска для облака слов
-            mask = imageio.v2.imread(r'medvedev.jpg')
-            ### Облако слов "до"
-            if len(text_raw) != 0:
-                wordcloud = WordCloud(width=2000,
-                                      height=1500,
-                                      random_state=1,
-                                      background_color='white',
-                                      colormap='Set2',
-                                      collocations=False,
-                                      mask=mask).generate(text_raw)
-                plt.imshow(wordcloud, interpolation='bilinear')
-                plt.axis("off")
-                plt.savefig(f"./output/{channel[:-4]}_frequency_words.png")
-                plt.close()
-        else:
-            fdist = FreqDist(text)
-            # print(fdist.most_common(30))
-            with open(f"./output/{channel[:-4]}_frequency_words.txt", "w", encoding="utf-16") as \
-                    file:
-                for j in fdist.most_common(30):
-                    line = ' '.join(str(x) for x in j)
-                    file.write(line + '\n')
+                with open(f"./output/{channel[:-4]}_newspeak.txt", "w", \
+                          encoding="utf-16") as file:
+                    print(newspeak_output)
+                    file.write(str(newspeak_output))
 
-            with open(f"./output/{channel[:-4]}_newspeak.txt", "w", \
-                      encoding="utf-16") as file:
-                print(newspeak_output)
-                file.write(str(newspeak_output))
+                # ### Построение облака слов и запись его в файл
+                # text_raw = " ".join(text)
+                # ### Маска для облака слов
+                # mask = imageio.v2.imread(r'medvedev.jpg')
+                # ### Облако слов "после"
+                # if len(text_raw) != 0:
+                #     wordcloud = WordCloud(width=2000,
+                #                           height=1500,
+                #                           random_state=1,
+                #                           background_color='white',
+                #                           colormap='Set2',
+                #                           collocations=False,
+                #                           mask=mask).generate(text_raw)
+                #     plt.imshow(wordcloud, interpolation='bilinear')
+                #     plt.axis("off")
+                #     plt.savefig(f"./output/{channel[:-4]}_frequency_words.png")
+                #     plt.close()
 
-            ### Построение облака слов и запись его в файл
-            text_raw = " ".join(text)
-            ### Маска для облака слов
-            mask = imageio.v2.imread(r'medvedev.jpg')
-            ### Облако слов "после"
-            if len(text_raw) != 0:
-                wordcloud = WordCloud(width=2000,
-                                      height=1500,
-                                      random_state=1,
-                                      background_color='white',
-                                      colormap='Set2',
-                                      collocations=False,
-                                      mask=mask).generate(text_raw)
-                plt.imshow(wordcloud, interpolation='bilinear')
-                plt.axis("off")
-                plt.savefig(f"./output/{channel[:-4]}_frequency_words.png")
-                plt.close()
+        print_and_plot(text,channel)
+def count_dicts(common_list):
+    result = {}
+    for sublist in common_list:
+        for i in range(0, len(sublist), 2):
+            name = sublist[i]
+            d = sublist[i + 1]
+            if name in result:
+                for key, value in d.items():
+                    if key in result[name]:
+                        result[name][key] += value
+                    else:
+                        result[name][key] = value
+            else:
+                result[name] = d
 
+    return result
 def translate():
     channels_to_be_translated_list = []
     for root, dirs, files in os.walk("./output/"):
@@ -217,9 +240,12 @@ def translate():
 
 
     # print(len(tokenizer.tokenize(text_words)), text_words.count(('специальная военная операция')))
+
 if __name__ == '__main__':
     start_time = time.time()
     # parse_channel_history()
     analysis()
     # translate()
+    print(count_dicts(common_list))
+
     print("--- %s seconds ---" % (time.time() - start_time))
