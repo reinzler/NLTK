@@ -262,6 +262,6 @@ if __name__ == '__main__':
     for process in processes:
         process.join()
 
-        # translate()
+       # # translate()
 
     print("--- %s seconds ---" % (time.time() - start_time))
